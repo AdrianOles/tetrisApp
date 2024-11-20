@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { View, Text, Switch, Image, Pressable } from "react-native";
 import * as SystemUI from 'expo-system-ui';
 import RNDateTimePicker, { DateTimePickerEvent } from "@react-native-community/datetimepicker";
-import SegmentedControl from "@react-native-segmented-control/segmented-control";
 import { StatusBar } from "expo-status-bar";
 import { collection, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
 import { db } from '../firebaseConfig';
