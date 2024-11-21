@@ -100,12 +100,8 @@ export default function App(this: any) {
     useEffect(() => {
         if (settings) {
             setIsEnabled(settings.power);
-            console.log("Running with: " + settings.alarm)
-            console.log(parseTimeString(settings.alarm))
             setDate(parseTimeString(settings.alarm));
         }
-
-        console.log(settings);
     }, [settings])
 
     useEffect(() => {
@@ -185,8 +181,7 @@ export default function App(this: any) {
     }
 
     const changeDuration = async (num: number) => {
-        let temp = (num + 1) * 15;
-        if (num == 2) temp = 60;
+        let temp = (num + 1) * 15 + 15;
         const ref = doc(db, "Settings", "Adrian");
         await updateDoc(ref, {
             "duration": temp,
@@ -310,10 +305,10 @@ export default function App(this: any) {
                                 flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', gap: 10, position: 'relative'
                             }}>
                                 <Pressable onPress={() => changeDuration(0)} style={{ backgroundColor: duration === 0 ? '#FFFFFF15' : '', height: 36, flexGrow: 1, borderRadius: 250, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                    <Text style={{ color: '#FFF', fontFamily: 'Figtree-SemiBold' }}>15 mins</Text>
+                                    <Text style={{ color: '#FFF', fontFamily: 'Figtree-SemiBold' }}>30 mins</Text>
                                 </Pressable>
                                 <Pressable onPress={() => changeDuration(1)} style={{ backgroundColor: duration === 1 ? '#FFFFFF15' : '', height: 36, flexGrow: 1, borderRadius: 250, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                    <Text style={{ color: '#FFF', fontFamily: 'Figtree-SemiBold' }}>30 mins</Text>
+                                    <Text style={{ color: '#FFF', fontFamily: 'Figtree-SemiBold' }}>45 mins</Text>
                                 </Pressable>
                                 <Pressable onPress={() => changeDuration(2)} style={{ backgroundColor: duration === 2 ? '#FFFFFF15' : '', height: 36, flexGrow: 1, borderRadius: 250, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                     <Text style={{ color: '#FFF', fontFamily: 'Figtree-SemiBold' }}>60 mins</Text>

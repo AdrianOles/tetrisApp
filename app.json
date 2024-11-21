@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "tetrisApp",
-    "slug": "tetrisApp",
+    "name": "Tetris Lamp",
+    "slug": "Tetris Lamp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
