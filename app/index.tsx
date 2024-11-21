@@ -101,6 +101,8 @@ export default function App(this: any) {
         if (settings) {
             setIsEnabled(settings.power);
             setDate(parseTimeString(settings.alarm));
+            setDuration(settings.duration / 15 - 2);
+            setStrength(settings.intensity);
         }
     }, [settings])
 
