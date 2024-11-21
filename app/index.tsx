@@ -19,6 +19,26 @@ interface LampSettings {
     power: boolean
 }
 
+const parseTimeString = (timeString: String) => {
+    // Normalize the input to remove any non-breaking or unexpected spaces
+    const cleanedString = timeString.replace(/\u202F/g, ' ').trim();
+
+    // Split the cleaned string into time and modifier (AM/PM)
+    const [time, modifier] = cleanedString.split(' ');
+    let [hours, minutes] = time.split(':').map(Number);
+
+    if (modifier === 'PM' && hours !== 12) {
+        hours += 12;
+    }
+    if (modifier === 'AM' && hours === 12) {
+        hours = 0;
+    }
+
+    const date = new Date();
+    date.setHours(hours, minutes, 0, 0); // Set local time
+    return date;
+};
+
 export default function App(this: any) {
     const [fontsLoaded, error] = useFonts({
         "Figtree-Light": require("../assets/fonts/fonts/Figtree-Light.ttf"), //300
@@ -35,7 +55,7 @@ export default function App(this: any) {
     const [standard, setStandard] = useState(false);
     const [duration, setDuration] = useState<number>(0);
     const [strength, setStrength] = useState<number>(0);
-    const [date, setDate] = useState(new Date());
+    const [date, setDate] = useState(parseTimeString("7:00 AM"));
     const [show, setShow] = useState(false);
 
     useEffect(() => {
@@ -80,7 +100,12 @@ export default function App(this: any) {
     useEffect(() => {
         if (settings) {
             setIsEnabled(settings.power);
+            console.log("Running with: " + settings.alarm)
+            console.log(parseTimeString(settings.alarm))
+            setDate(parseTimeString(settings.alarm));
         }
+
+        console.log(settings);
     }, [settings])
 
     useEffect(() => {
